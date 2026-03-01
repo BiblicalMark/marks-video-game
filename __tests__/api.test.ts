@@ -17,6 +17,7 @@ import userHandler from '../pages/api/user';
 import logoutHandler from '../pages/api/logout';
 import checkoutHandler from '../pages/api/checkout';
 import webhookHandler from '../pages/api/webhook';
+import leaderboardHandler from '../pages/api/leaderboard';
 
 // helper to call API handlers with JSON bodies
 async function run(handler: any, method: string, body?: any, cookies?: Record<string,string>) {
@@ -105,5 +106,18 @@ describe('API routes', () => {
     expect(status).toBe(200);
     const updated = db.findUser('alice');
     expect(updated.is_subscribed).toBe(1);
+  });
+
+  test('leaderboard returns top scores', async () => {
+    // add some scores for multiple users
+    const alice = db.findUser('alice');
+    const bob = db.createUser('bob', 'pw');
+    // record scores
+    db.addScore(alice.id, 3);
+    db.addScore(bob.id, 5);
+    const { status, data } = await run(leaderboardHandler, 'GET');
+    expect(status).toBe(200);
+    expect(Array.isArray(data.top)).toBe(true);
+    expect(data.top[0].username).toBe('bob');
   });
 });

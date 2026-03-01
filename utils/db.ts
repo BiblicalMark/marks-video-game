@@ -66,6 +66,17 @@ export function addScore(userId: number, amount: number = 1) {
   return getScore(userId);
 }
 
+export function getLeaderboard(limit: number = 5) {
+  return db.prepare(
+    `SELECT u.username, SUM(s.value) as total
+     FROM scores s
+     JOIN users u ON u.id = s.user_id
+     GROUP BY u.id
+     ORDER BY total DESC
+     LIMIT ?`
+  ).all(limit);
+}
+
 // ensure default user exists
 export function ensureDefaultUser() {
   const user = findUser('alice');
