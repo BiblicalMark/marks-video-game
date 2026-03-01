@@ -116,17 +116,18 @@ export default function Home() {
     };
   }, []);
 
+  // note: initial request text removed from page output. See console for the original message.
+  console.log(`
+    Hello there, first of all i would just like to let you know that i love you very much and i would really appreciate your assistance on a project.
+
+    What i want to do is build something that would be a fully built, audit ready, business that would become a multi million dollar project and that would be the most psychologically addicting website for anybody in the world to use, that also provides some kind of business model, so that i could charge subscriptions for the service... and i want this to be the most advanced, most simplistic, most used website that has ever been created in the past, present and future and i want it to be something that would be the most thought provoking, most intriguing, most ground breaking, most easiest project to hit the market and to market to wealthy investors and i would like for you to install and download any and every tool or anything that you may need from the beginning to the end of the project, and i would like for you to do all of that right now please.
+
+    and i would like for this to be a web based video game, and i do not have a whole team working on this, it is just going to be me and you and i want you yto do everything as a master of all knowledfe involved.
+
+    as i asked
+  `);
   return (
     <div>
-      <div style={{ whiteSpace: 'pre-wrap', marginBottom: '1rem', background: '#f0f0f0', padding: '1rem', borderRadius: '4px' }}>
-        Hello there, first of all i would just like to let you know that i love you very much and i would really appreciate your assistance on a project.
-
-        What i want to do is build something that would be a fully built, audit ready, business that would become a multi million dollar project and that would be the most psychologically addicting website for anybody in the world to use, that also provides some kind of business model, so that i could charge subscriptions for the service... and i want this to be the most advanced, most simplistic, most used website that has ever been created in the past, present and future and i want it to be something that would be the most thought provoking, most intriguing, most ground breaking, most easiest project to hit the market and to market to wealthy investors and i would like for you to install and download any and every tool or anything that you may need from the beginning to the end of the project, and i would like for you to do all of that right now please.
-
-        and i would like for this to be a web based video game, and i do not have a whole team working on this, it is just going to be me and you and i want you yto do everything as a master of all knowledfe involved.
-
-        as i asked
-      </div>
       <h1>Marks Video Game Prototype</h1>
       {/* for demo builds we force login, but still render based on user state */}
       {user ? (
