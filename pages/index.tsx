@@ -19,7 +19,23 @@ export default function Home() {
   useEffect(() => {
     fetch('/api/user')
       .then((r) => r.json())
-      .then((data) => setUser(data.user))
+      .then((data) => {
+        if (data.user) {
+          setUser(data.user);
+        } else {
+          // automatically log in default demo user so visitors see the game immediately
+          fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: 'alice', password: 'password123' }),
+          })
+            .then((r) => r.json())
+            .then((d) => {
+              if (d.user) setUser(d.user);
+            })
+            .catch(console.error);
+        }
+      })
       .catch(console.error);
   }, []);
 
@@ -103,6 +119,7 @@ export default function Home() {
   return (
     <div>
       <h1>Marks Video Game Prototype</h1>
+      {/* for demo builds we force login, but still render based on user state */}
       {user ? (
         <>
           <p>Logged in as {user.username} <button onClick={handleLogout}>Logout</button></p>
